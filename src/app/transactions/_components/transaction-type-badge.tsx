@@ -1,0 +1,34 @@
+import { Badge } from "@/components/ui/badge";
+import { transactionTypeMap } from "@/constants/transaction";
+import { cn } from "@/lib/utils";
+import { TransactionType } from "@prisma/client";
+import { CircleIcon } from "lucide-react";
+
+interface Props {
+  transactionType: TransactionType;
+}
+
+export default function TransactionTypeBadge({ transactionType }: Props) {
+  const label = transactionTypeMap[transactionType];
+  return (
+    <Badge
+      className={cn("gap-1 font-bold", {
+        "bg-primary/10 text-primary":
+          transactionType === TransactionType.DEPOSIT,
+        "bg-danger/10 text-danger": transactionType === TransactionType.EXPENSE,
+        "bg-white/10 text-white":
+          transactionType === TransactionType.INVESTMENT,
+      })}
+    >
+      <CircleIcon
+        className={cn({
+          "fill-primary": transactionType === TransactionType.DEPOSIT,
+          "fill-danger": transactionType === TransactionType.EXPENSE,
+          "fill-white": transactionType === TransactionType.INVESTMENT,
+        })}
+        size={10}
+      />
+      <span>{label}</span>
+    </Badge>
+  );
+}

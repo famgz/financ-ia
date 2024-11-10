@@ -75,3 +75,7 @@ body {
     @apply min-h-screen bg-background text-foreground antialiased;
   }
 }
+
+.flex-center {
+  @apply flex items-center justify-center;
+}

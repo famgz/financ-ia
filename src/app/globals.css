@@ -71,10 +71,7 @@ body {
   * {
     @apply border-border;
   }
-  html {
-    @apply h-full;
-  }
   body {
-    @apply h-full bg-background text-foreground;
+    @apply min-h-screen bg-background text-foreground antialiased;
   }
 }

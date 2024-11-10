@@ -1,8 +1,15 @@
 "use client";
 
 import TransactionTypeBadge from "@/app/transactions/_components/transaction-type-badge";
+import { Button } from "@/components/ui/button";
+import {
+  transactionCategoryMap,
+  transactionPaymentMethodMap,
+} from "@/constants/transaction";
+import { formatDate, toReal } from "@/lib/utils";
 import { Transaction } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
+import { SquarePenIcon, TrashIcon } from "lucide-react";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -19,21 +26,39 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "category",
     header: "Categoria",
+    cell: ({ row: { original: transaction } }) =>
+      transactionCategoryMap[transaction.category],
   },
   {
     accessorKey: "paymentMethod",
     header: "Método de Pagamento",
+    cell: ({ row: { original: transaction } }) =>
+      transactionPaymentMethodMap[transaction.paymentMethod],
   },
   {
     accessorKey: "date",
     header: "Data",
+    cell: ({ row: { original: transaction } }) => formatDate(transaction.date),
   },
   {
     accessorKey: "amountInCents",
     header: "Valor",
+    cell: ({ row: { original: transaction } }) =>
+      toReal(transaction.amountInCents),
   },
   {
     accessorKey: "actions",
-    header: "",
+    header: "Ações",
+    cell: ({ row: { original: transaction } }) => (
+      <div className="flex items-center gap-1 text-muted-foreground">
+        <Button variant={"ghost"} size={"icon"}>
+          <SquarePenIcon />
+        </Button>
+
+        <Button variant={"ghost"} size={"icon"}>
+          <TrashIcon />
+        </Button>
+      </div>
+    ),
   },
 ];

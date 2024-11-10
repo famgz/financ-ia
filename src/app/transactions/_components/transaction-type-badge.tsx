@@ -16,7 +16,7 @@ export default function TransactionTypeBadge({ transactionType }: Props) {
         "bg-primary/10 text-primary":
           transactionType === TransactionType.DEPOSIT,
         "bg-danger/10 text-danger": transactionType === TransactionType.EXPENSE,
-        "bg-white/10 text-white":
+        "bg-white/10 text-foreground":
           transactionType === TransactionType.INVESTMENT,
       })}
     >
@@ -24,7 +24,7 @@ export default function TransactionTypeBadge({ transactionType }: Props) {
         className={cn({
           "fill-primary": transactionType === TransactionType.DEPOSIT,
           "fill-danger": transactionType === TransactionType.EXPENSE,
-          "fill-white": transactionType === TransactionType.INVESTMENT,
+          "fill-foreground": transactionType === TransactionType.INVESTMENT,
         })}
         size={10}
       />

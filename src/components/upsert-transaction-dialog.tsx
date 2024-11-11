@@ -77,6 +77,7 @@ export default function UpsertTransactionDialog({
   transaction,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -91,8 +92,14 @@ export default function UpsertTransactionDialog({
   });
 
   async function onSubmit(data: FormSchema) {
-    await upsertTransaction({ ...data, id: transaction?.id });
-    setOpen(false);
+    try {
+      setDisableSubmit(true);
+      await upsertTransaction({ ...data, id: transaction?.id });
+      setOpen(false);
+    } catch (e) {
+      console.error(e);
+      setDisableSubmit(false);
+    }
   }
 
   function handleOpenChange(open: boolean) {
@@ -261,7 +268,9 @@ export default function UpsertTransactionDialog({
 
             <AlertDialogFooter>
               <AlertDialogCancel>Cancelar</AlertDialogCancel>
-              <Button type="submit">{dialogActionLabel}</Button>
+              <Button type="submit" disabled={disableSubmit}>
+                {dialogActionLabel}
+              </Button>
             </AlertDialogFooter>
           </form>
         </Form>

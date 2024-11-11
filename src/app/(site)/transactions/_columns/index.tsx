@@ -1,6 +1,6 @@
 "use client";
 
-import TransactionTypeBadge from "@/app/transactions/_components/transaction-type-badge";
+import TransactionTypeBadge from "@/app/(site)/transactions/_components/transaction-type-badge";
 import { Button } from "@/components/ui/button";
 import UpsertTransactionDialog from "@/components/upsert-transaction-dialog";
 import {

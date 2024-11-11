@@ -3,7 +3,6 @@ import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -25,11 +24,7 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={`${mulish.className} dark`}>
-          <div className="flex h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            {/* footer */}
-          </div>
+          <div className="flex h-screen flex-col">{children}</div>
         </body>
       </html>
     </ClerkProvider>

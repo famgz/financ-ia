@@ -8,7 +8,7 @@ export const MoneyInput = forwardRef(
     props: NumericFormatProps<InputProps>,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const [cents, setCents] = useState(0);
+    const [cents, setCents] = useState(props.value);
 
     const handleValueChange = (value: string) => {
       const numericValue = stringToInt(value);

@@ -6,13 +6,18 @@ import { db } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function addTransaction(
-  data: Omit<Prisma.TransactionCreateInput, "userId">,
-) {
+interface Params extends Omit<Prisma.TransactionCreateInput, "id" | "userId"> {
+  id?: string;
+  userId?: string;
+}
+
+export async function upsertTransaction(data: Params) {
   addTransactionSchema.parse(data);
   const userId = await getUserIdElseThrow();
-  await db.transaction.create({
-    data: { ...data, userId },
+  await db.transaction.upsert({
+    where: { id: data.id },
+    update: { ...data },
+    create: { ...data, userId },
   });
   revalidatePath("/transactions");
 }

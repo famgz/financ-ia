@@ -2,6 +2,7 @@
 
 import TransactionTypeBadge from "@/app/transactions/_components/transaction-type-badge";
 import { Button } from "@/components/ui/button";
+import UpsertTransactionDialog from "@/components/upsert-transaction-dialog";
 import {
   transactionCategoryMap,
   transactionPaymentMethodMap,
@@ -51,9 +52,11 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     header: "Ações",
     cell: ({ row: { original: transaction } }) => (
       <div className="flex items-center gap-1 text-muted-foreground">
-        <Button variant={"ghost"} size={"icon"}>
-          <SquarePenIcon />
-        </Button>
+        <UpsertTransactionDialog transaction={transaction}>
+          <Button variant={"ghost"} size={"icon"}>
+            <SquarePenIcon />
+          </Button>
+        </UpsertTransactionDialog>
 
         <Button variant={"ghost"} size={"icon"}>
           <TrashIcon />

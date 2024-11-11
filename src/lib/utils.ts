@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function toReal(cents: number | string): string {
+export function toReal(cents: number | string | undefined | null): string {
   cents = Number(cents);
   if (!cents || isNaN(cents)) return "";
   const realAmount = cents / 100;

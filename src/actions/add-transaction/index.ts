@@ -15,7 +15,7 @@ export async function upsertTransaction(data: Params) {
   addTransactionSchema.parse(data);
   const userId = await getUserIdElseThrow();
   await db.transaction.upsert({
-    where: { id: data.id },
+    where: { id: data?.id || "" },
     update: { ...data },
     create: { ...data, userId },
   });

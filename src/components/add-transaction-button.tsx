@@ -1,5 +1,6 @@
 "use client";
 
+import { addTransaction } from "@/actions/add-transaction";
 import { MoneyInput } from "@/components/money-input";
 import {
   AlertDialog,
@@ -41,6 +42,7 @@ import {
   TransactionType,
 } from "@prisma/client";
 import { ArrowDownUpIcon } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -48,7 +50,7 @@ const defaultMandatoryMessage = "Campo obrigatório";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, defaultMandatoryMessage),
-  amountInCents: z.number().int().min(1, defaultMandatoryMessage),
+  amountInCents: z.number().int().positive().min(1, defaultMandatoryMessage),
   type: z.nativeEnum(TransactionType, {
     required_error: defaultMandatoryMessage,
   }),
@@ -66,6 +68,8 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export default function AddTransactionButton() {
+  const [open, setOpen] = useState(false);
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,12 +82,19 @@ export default function AddTransactionButton() {
     },
   });
 
-  function onSubmit(data: FormSchema) {
+  async function onSubmit(data: FormSchema) {
     console.log(data);
+    await addTransaction(data);
+    setOpen(false);
+  }
+
+  function handleOpenChange(open: boolean) {
+    form.reset();
+    setOpen(open);
   }
 
   return (
-    <AlertDialog onOpenChange={() => form.reset()}>
+    <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger asChild>
         <Button className="gap-2 rounded-full font-bold">
           <span>Adicionar transação</span>
@@ -125,6 +136,8 @@ export default function AddTransactionButton() {
                     <MoneyInput
                       value={field.value}
                       onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
                       placeholder="Digite um valor"
                     />
                   </FormControl>

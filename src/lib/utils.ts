@@ -24,5 +24,5 @@ export function formatDate(date: Date): string {
 }
 
 export function stringToInt(str: string) {
-  return Number(str.replace(/\D/g, ""));
+  return Number(String(str).replace(/\D/g, ""));
 }

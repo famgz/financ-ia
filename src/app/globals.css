@@ -14,8 +14,6 @@ body {
 
 @layer base {
   :root {
-    --danger: 2 92% 57%;
-
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: transparent;
@@ -57,7 +55,7 @@ body {
     --muted-foreground: 240 5% 64.9%;
     --accent: 12 6.5% 15.1%;
     --accent-foreground: 0 0 100%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 2 92% 57%;
     --destructive-foreground: 0 85.7% 97.3%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;

@@ -104,6 +104,7 @@ export default function UpsertTransactionDialog({
 
   function handleOpenChange(open: boolean) {
     form.reset();
+    setDisableSubmit(false);
     setOpen(open);
   }
 

@@ -12,7 +12,7 @@ export default async function TransactionsPage() {
     redirect("/login");
   }
 
-  const transactions = await db.transaction.findMany({});
+  const transactions = await db.transaction.findMany({ where: { userId } });
 
   return (
     <div className="space-y-6 p-6">

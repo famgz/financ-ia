@@ -10,7 +10,7 @@ interface Props {
 
 export default function ExpensesPerCategory({ expensesPerCategory }: Props) {
   return (
-    <Card className="flex flex-col">
+    <Card className="flex h-full flex-col">
       <CardHeader className="border-b">
         <CardTitle className="font-bold">Gastos por Categoria</CardTitle>
       </CardHeader>

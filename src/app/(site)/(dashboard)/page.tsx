@@ -38,11 +38,13 @@ export default async function Home({ searchParams: { month } }: Props) {
       <div className="flex flex-col gap-6 sm:grid sm:grid-cols-[2fr,1fr]">
         <div className="flex flex-col gap-6">
           <SummaryCards month={month} {...dashboardData} />
-          <div className="grid h-full grid-cols-[1fr,2fr] grid-rows-1 gap-6">
+          <div className="grid h-full grid-cols-3 grid-rows-1 gap-6">
             <TransactionsPieChart {...dashboardData} />
-            <ExpensesPerCategory
-              expensesPerCategory={dashboardData.totalExpensePerCategory}
-            />
+            <div className="col-span-2">
+              <ExpensesPerCategory
+                expensesPerCategory={dashboardData.totalExpensePerCategory}
+              />
+            </div>
           </div>
         </div>
         <LastTransactions lastTransactions={dashboardData.lastTransactions} />

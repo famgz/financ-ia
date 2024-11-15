@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import UpsertTransactionDialog from "@/components/upsert-transaction-dialog";
 import { ArrowDownUpIcon } from "lucide-react";
 
-export default function AddTransactionButton() {
+export default function UpsertTransactionButton() {
   return (
     <UpsertTransactionDialog>
       <Button className="gap-2 rounded-full font-bold">

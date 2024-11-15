@@ -1,6 +1,6 @@
 "use server";
 
-import { addTransactionSchema } from "@/actions/add-transaction/schema";
+import { addTransactionSchema } from "@/actions/upsert-transaction/schema";
 import { getUserIdElseThrow } from "@/actions/auth";
 import { db } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";

@@ -1,6 +1,6 @@
 "use client";
 
-import { upsertTransaction } from "@/actions/add-transaction";
+import { upsertTransaction } from "@/actions/upsert-transaction";
 import { MoneyInput } from "@/components/money-input";
 import {
   AlertDialog,

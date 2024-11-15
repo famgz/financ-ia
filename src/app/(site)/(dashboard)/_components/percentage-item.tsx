@@ -10,7 +10,7 @@ export default function PercentageItem({ title, value, icon }: Props) {
   return (
     <div className="flex text-sm">
       <div className="flex flex-1 gap-2">
-        {icon}
+        <div className="flex-center size-6 rounded-md bg-muted/80">{icon}</div>
         <span className="text-muted-foreground">{title}</span>
       </div>
       <span className="font-semibold">{value}%</span>

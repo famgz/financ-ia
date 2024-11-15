@@ -29,25 +29,22 @@ export default async function Home({ searchParams: { month } }: Props) {
   const dashboardData = await getDashBoardData(month);
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="flex h-full flex-col gap-6 p-6">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <TimeSelect />
       </div>
 
       <div className="flex flex-col gap-6 sm:grid sm:grid-cols-[2fr,1fr]">
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           <SummaryCards month={month} {...dashboardData} />
-
-          <div className="grid grid-cols-3 grid-rows-1 gap-6">
+          <div className="grid h-full grid-cols-[1fr,2fr] grid-rows-1 gap-6">
             <TransactionsPieChart {...dashboardData} />
-
             <ExpensesPerCategory
               expensesPerCategory={dashboardData.totalExpensePerCategory}
             />
           </div>
         </div>
-
         <LastTransactions lastTransactions={dashboardData.lastTransactions} />
       </div>
     </div>

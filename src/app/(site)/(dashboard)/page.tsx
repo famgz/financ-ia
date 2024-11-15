@@ -1,4 +1,5 @@
 import ExpensesPerCategory from "@/app/(site)/(dashboard)/_components/expenses-per-category";
+import LastTransactions from "@/app/(site)/(dashboard)/_components/last-transactions";
 import SummaryCards from "@/app/(site)/(dashboard)/_components/summary-cards";
 import TimeSelect from "@/app/(site)/(dashboard)/_components/time-select";
 import { TransactionsPieChart } from "@/app/(site)/(dashboard)/_components/transactions-pie-chart";
@@ -28,14 +29,14 @@ export default async function Home({ searchParams: { month } }: Props) {
   const dashboardData = await getDashBoardData(month);
 
   return (
-    <div className="p-6">
-      <div className="flex flex-col sm:grid sm:grid-cols-[2fr,1fr]">
-        <div className="space-y-6">
-          <div className="flex justify-between">
-            <h1 className="text-2xl font-bold">Dashboard</h1>
-            <TimeSelect />
-          </div>
+    <div className="space-y-6 p-6">
+      <div className="flex justify-between">
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <TimeSelect />
+      </div>
 
+      <div className="flex flex-col gap-6 sm:grid sm:grid-cols-[2fr,1fr]">
+        <div className="space-y-6">
           <SummaryCards month={month} {...dashboardData} />
 
           <div className="grid grid-cols-3 grid-rows-1 gap-6">
@@ -46,6 +47,8 @@ export default async function Home({ searchParams: { month } }: Props) {
             />
           </div>
         </div>
+
+        <LastTransactions lastTransactions={dashboardData.lastTransactions} />
       </div>
     </div>
   );

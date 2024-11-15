@@ -4,8 +4,8 @@ import TransactionTypeBadge from "@/app/(site)/transactions/_components/transact
 import { Button } from "@/components/ui/button";
 import UpsertTransactionDialog from "@/components/upsert-transaction-dialog";
 import {
-  transactionCategoryMap,
-  transactionPaymentMethodMap,
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/constants/transaction";
 import { formatDate, toReal } from "@/lib/utils";
 import { Transaction } from "@prisma/client";
@@ -28,13 +28,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "category",
     header: "Categoria",
     cell: ({ row: { original: transaction } }) =>
-      transactionCategoryMap[transaction.category],
+      TRANSACTION_CATEGORY_LABELS[transaction.category],
   },
   {
     accessorKey: "paymentMethod",
     header: "Método de Pagamento",
     cell: ({ row: { original: transaction } }) =>
-      transactionPaymentMethodMap[transaction.paymentMethod],
+      TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
   },
   {
     accessorKey: "date",

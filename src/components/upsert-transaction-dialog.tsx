@@ -31,9 +31,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  transactionCategoryMap,
-  transactionPaymentMethodMap,
-  transactionTypeMap,
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+  TRANSACTION_TYPE_LABELS,
 } from "@/constants/transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -179,7 +179,7 @@ export default function UpsertTransactionDialog({
                     </FormControl>
 
                     <SelectContent>
-                      {Object.entries(transactionTypeMap).map(
+                      {Object.entries(TRANSACTION_TYPE_LABELS).map(
                         ([value, label]) => (
                           <SelectItem value={value} key={value}>
                             {label}
@@ -210,7 +210,7 @@ export default function UpsertTransactionDialog({
                     </FormControl>
 
                     <SelectContent>
-                      {Object.entries(transactionCategoryMap).map(
+                      {Object.entries(TRANSACTION_CATEGORY_LABELS).map(
                         ([value, label]) => (
                           <SelectItem value={value} key={value}>
                             {label}
@@ -241,7 +241,7 @@ export default function UpsertTransactionDialog({
                     </FormControl>
 
                     <SelectContent>
-                      {Object.entries(transactionPaymentMethodMap).map(
+                      {Object.entries(TRANSACTION_PAYMENT_METHOD_LABELS).map(
                         ([value, label]) => (
                           <SelectItem value={value} key={value}>
                             {label}

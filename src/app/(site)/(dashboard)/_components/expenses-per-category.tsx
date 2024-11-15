@@ -1,7 +1,7 @@
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { transactionCategoryMap } from "@/constants/transaction";
+import { TRANSACTION_CATEGORY_LABELS } from "@/constants/transaction";
 import { TotalExpensePerCategory } from "@/data/get-dashboard-data/types";
 
 interface Props {
@@ -19,7 +19,7 @@ export default function ExpensesPerCategory({ expensesPerCategory }: Props) {
         {expensesPerCategory.map((category) => (
           <div key={category.category} className="space-y-1">
             <div className="flex w-full justify-between text-sm font-bold">
-              <span>{transactionCategoryMap[category.category]}</span>
+              <span>{TRANSACTION_CATEGORY_LABELS[category.category]}</span>
               <span>{category.percentageOfTotal}%</span>
             </div>
             <Progress value={category.percentageOfTotal} />

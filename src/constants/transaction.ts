@@ -4,13 +4,13 @@ import {
   TransactionType,
 } from "@prisma/client";
 
-export const transactionTypeMap = {
+export const TRANSACTION_TYPE_LABELS = {
   [TransactionType.DEPOSIT]: "Depósito",
   [TransactionType.EXPENSE]: "Despesa",
   [TransactionType.INVESTMENT]: "Investimento",
 };
 
-export const transactionCategoryMap = {
+export const TRANSACTION_CATEGORY_LABELS = {
   [TransactionCategory.HOUSING]: "Habitação",
   [TransactionCategory.TRANSPORTATION]: "Transporte",
   [TransactionCategory.FOOD]: "Alimentação",
@@ -22,7 +22,7 @@ export const transactionCategoryMap = {
   [TransactionCategory.OTHER]: "Outros",
 };
 
-export const transactionPaymentMethodMap = {
+export const TRANSACTION_PAYMENT_METHOD_LABELS = {
   [TransactionPaymentMethod.CREDIT_CARD]: "Cartão de Crédito",
   [TransactionPaymentMethod.DEBIT_CARD]: "Cartão de Débito",
   [TransactionPaymentMethod.BANK_TRANSFER]: "Transferência Bancária",
@@ -30,4 +30,14 @@ export const transactionPaymentMethodMap = {
   [TransactionPaymentMethod.CASH]: "Dinheiro",
   [TransactionPaymentMethod.PIX]: "PIX",
   [TransactionPaymentMethod.OTHER]: "Outro",
+};
+
+export const TRANSACTION_PAYMENT_METHOD_ICONS = {
+  [TransactionPaymentMethod.CREDIT_CARD]: "/credit-card.svg",
+  [TransactionPaymentMethod.DEBIT_CARD]: "/debit-card.svg",
+  [TransactionPaymentMethod.BANK_TRANSFER]: "/bank-transfer.svg",
+  [TransactionPaymentMethod.BANK_SLIP]: "/bank-slip.svg",
+  [TransactionPaymentMethod.CASH]: "/cash.svg",
+  [TransactionPaymentMethod.PIX]: "/pix.svg",
+  [TransactionPaymentMethod.OTHER]: "/other.svg",
 };

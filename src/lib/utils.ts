@@ -1,3 +1,4 @@
+import { TransactionType } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -23,6 +24,32 @@ export function formatDate(date: Date): string {
   });
 }
 
+export function formatShortDate(date: Date): string {
+  return date.toLocaleDateString("pt-BR", {
+    // day: "2-digit",
+    // month: "short",
+    // year: "numeric",
+    dateStyle: "short",
+  });
+}
+
 export function stringToInt(str: string) {
   return Number(String(str).replace(/\D/g, ""));
+}
+
+export function getAmountColor(transactionType: TransactionType) {
+  switch (transactionType) {
+    case "DEPOSIT":
+      return "text-primary";
+    case "EXPENSE":
+      return "text-destructive";
+    case "INVESTMENT":
+      return "text-foreground";
+    default:
+      return "text-foreground";
+  }
+}
+
+export function getAmountPrefix(transactionType: TransactionType) {
+  return transactionType === "DEPOSIT" ? "+" : "-";
 }

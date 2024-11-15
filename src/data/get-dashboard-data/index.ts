@@ -1,3 +1,5 @@
+"use server";
+
 import {
   TotalExpensePerCategory,
   TransactionPercentagePerType,
@@ -77,8 +79,13 @@ export async function getDashBoardData(month: string) {
         (totalAmountPerCategory / expensesTotal) * 100,
       ),
     };
-    console.log(data);
     return data;
+  });
+
+  const lastTransactions = await db.transaction.findMany({
+    where,
+    orderBy: { date: "desc" },
+    take: 10,
   });
 
   return {
@@ -88,5 +95,6 @@ export async function getDashBoardData(month: string) {
     expensesTotal,
     typesPercentages,
     totalExpensePerCategory,
+    lastTransactions,
   };
 }

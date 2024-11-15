@@ -17,7 +17,7 @@ export default function SummaryCard({
   size = "sm",
 }: Props) {
   return (
-    <Card>
+    <Card className={cn(size === "sm" ? "" : "bg-muted/40")}>
       <CardHeader>
         <div className="flex flex-row items-center gap-4">
           {icon}

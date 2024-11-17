@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { auth } from "@clerk/nextjs/server";
+import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export default async function SubscriptionPage() {
@@ -8,5 +11,63 @@ export default async function SubscriptionPage() {
     redirect("/login");
   }
 
-  return <div></div>;
+  return (
+    <div className="space-y-6 p-6">
+      <h1 className="text-2xl font-bold">Assinatura</h1>
+
+      <div className="flex gap-6">
+        <Card className="w-[450px]">
+          <CardHeader className="border-b py-8">
+            <h2 className="text-center text-2xl font-semibold">Plano Básico</h2>
+
+            <div className="flex-center gap-3">
+              <span className="text-4xl">R$</span>
+              <span className="text-6xl font-semibold">0</span>
+              <span className="text-2xl text-muted-foreground">/ mês</span>
+            </div>
+          </CardHeader>
+
+          <CardContent className="space-y-6 py-8">
+            <div className="flex items-center gap-2">
+              <CheckIcon className="text-primary" />
+              <p>Apenas 10 transações por mês (7/10)</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <XIcon className="text-foreground" />
+              <p>Relatórios de IA</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="w-[450px]">
+          <CardHeader className="border-b py-8">
+            <h2 className="text-center text-2xl font-semibold">
+              Plano Premium
+            </h2>
+
+            <div className="flex-center gap-3">
+              <span className="text-4xl">R$</span>
+              <span className="text-6xl font-semibold">19</span>
+              <span className="text-2xl text-muted-foreground">/ mês</span>
+            </div>
+          </CardHeader>
+
+          <CardContent className="space-y-6 py-8">
+            <div className="flex items-center gap-2">
+              <CheckIcon className="text-primary" />
+              <p>Transações ilimitadas</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="text-primary" />
+              <p>Relatórios de IA</p>
+            </div>
+
+            <Button className="w-full rounded-full text-xl font-bold">
+              Adquirir Plano
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
 }

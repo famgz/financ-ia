@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import AcquirePlanButton from "@/app/(site)/subscription/_components/acquire-plan-button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { auth } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
@@ -62,9 +62,7 @@ export default async function SubscriptionPage() {
               <p>Relatórios de IA</p>
             </div>
 
-            <Button className="w-full rounded-full text-xl font-bold">
-              Adquirir Plano
-            </Button>
+            <AcquirePlanButton />
           </CardContent>
         </Card>
       </div>

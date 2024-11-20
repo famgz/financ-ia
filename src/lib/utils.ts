@@ -1,5 +1,6 @@
 import { TransactionType } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
+import { isMatch } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -55,4 +56,8 @@ export function getAmountColor(transactionType: TransactionType) {
 
 export function getAmountPrefix(transactionType: TransactionType) {
   return transactionType === "DEPOSIT" ? "+" : "-";
+}
+
+export function isValidMonth(month: string | number | undefined | null) {
+  return !!month && isMatch(String(month), "MM");
 }

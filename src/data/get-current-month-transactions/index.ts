@@ -1,12 +1,9 @@
+import { getUserIdElseThrow } from "@/actions/auth";
 import { db } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 import { endOfMonth, startOfMonth } from "date-fns";
 
 export async function getCurrentMonthTransactionsAmount() {
-  const { userId } = await auth();
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
+  const userId = await getUserIdElseThrow();
   return await db.transaction.count({
     where: {
       userId,

@@ -1,14 +1,10 @@
 "use server";
 
+import { getUserIdElseThrow } from "@/actions/auth";
 import { getStripe } from "@/lib/stripe";
-import { auth } from "@clerk/nextjs/server";
 
 export default async function createStripeCheckout() {
-  const { userId } = await auth();
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
+  const userId = await getUserIdElseThrow();
   const stripe = await getStripe();
 
   const session = await stripe.checkout.sessions.create({

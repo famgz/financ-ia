@@ -1,20 +1,15 @@
 "use server";
 
+import { getUserIdElseThrow } from "@/actions/auth";
 import {
   TotalExpensePerCategory,
   TransactionPercentagePerType,
 } from "@/data/get-dashboard-data/types";
 import { db } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 import { TransactionType } from "@prisma/client";
 
 export async function getDashBoardData(month: string) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
+  const userId = await getUserIdElseThrow();
   const where = {
     userId,
     date: {

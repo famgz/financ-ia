@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { isMatch } from "date-fns";
+import { isValidMonth } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const MONTH_OPTIONS = [
@@ -28,8 +28,8 @@ const MONTH_OPTIONS = [
 export default function TimeSelect() {
   const searchParams = useSearchParams();
   let month = searchParams.get("month");
-  const isValidMonth = month && isMatch(month, "MM");
-  if (!isValidMonth) month = "";
+  const validMonth = isValidMonth(month);
+  if (!validMonth) month = "";
 
   const { replace } = useRouter();
 

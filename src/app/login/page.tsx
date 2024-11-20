@@ -19,7 +19,7 @@ export default async function LoginPage() {
         <LogoWithName />
         <h1 className="mt-8 text-4xl font-bold">Bem-vindo</h1>
         <p className="mt-3 text-muted-foreground">
-          A Finance AI é uma plataforma de gestão financeira que utiliza IA para
+          A Financ.IA é uma plataforma de gestão financeira que utiliza IA para
           monitorar suas movimentações, e oferecer insights personalizados,
           facilitando o controle do seu orçamento.
         </p>

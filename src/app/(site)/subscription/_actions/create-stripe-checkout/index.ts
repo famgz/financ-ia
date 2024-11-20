@@ -1,7 +1,7 @@
 "use server";
 
+import { getStripe } from "@/lib/stripe";
 import { auth } from "@clerk/nextjs/server";
-import Stripe from "stripe";
 
 export default async function createStripeCheckout() {
   const { userId } = await auth();
@@ -9,13 +9,7 @@ export default async function createStripeCheckout() {
     throw new Error("Unauthorized");
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("Stripe secret key not found");
-  }
-
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2024-10-28.acacia",
-  });
+  const stripe = await getStripe();
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

@@ -1,6 +1,7 @@
 import AcquirePlanButton from "@/app/(site)/subscription/_components/acquire-plan-button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 
@@ -11,15 +12,18 @@ export default async function SubscriptionPage() {
     redirect("/login");
   }
 
+  const user = await (await clerkClient()).users.getUser(userId);
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+
   return (
     <div className="space-y-6 p-6">
       <h1 className="text-2xl font-bold">Assinatura</h1>
 
       <div className="flex gap-6">
+        {/* basic plan card */}
         <Card className="w-[450px]">
           <CardHeader className="border-b py-8">
             <h2 className="text-center text-2xl font-semibold">Plano Básico</h2>
-
             <div className="flex-center gap-3">
               <span className="text-4xl">R$</span>
               <span className="text-6xl font-semibold">0</span>
@@ -39,12 +43,17 @@ export default async function SubscriptionPage() {
           </CardContent>
         </Card>
 
+        {/* premium plan card */}
         <Card className="w-[450px]">
-          <CardHeader className="border-b py-8">
+          <CardHeader className="relative border-b py-8">
+            {hasPremiumPlan && (
+              <Badge className="absolute left-6 top-6 bg-primary/10 text-base text-primary">
+                Ativo
+              </Badge>
+            )}
             <h2 className="text-center text-2xl font-semibold">
               Plano Premium
             </h2>
-
             <div className="flex-center gap-3">
               <span className="text-4xl">R$</span>
               <span className="text-6xl font-semibold">19</span>
@@ -61,8 +70,9 @@ export default async function SubscriptionPage() {
               <CheckIcon className="text-primary" />
               <p>Relatórios de IA</p>
             </div>
-
-            <AcquirePlanButton />
+            <div className="!mt-12">
+              <AcquirePlanButton />
+            </div>
           </CardContent>
         </Card>
       </div>

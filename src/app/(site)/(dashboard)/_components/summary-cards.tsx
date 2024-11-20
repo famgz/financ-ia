@@ -1,4 +1,5 @@
 import SummaryCard from "@/app/(site)/(dashboard)/_components/summary-card";
+import { canUserAddTransaction } from "@/data/can-user-add-transaction";
 import {
   PiggyBankIcon,
   TrendingDownIcon,
@@ -20,6 +21,8 @@ export default async function SummaryCards({
   expensesTotal,
   investmentsTotal,
 }: Props) {
+  const userCanAddTransaction = await canUserAddTransaction();
+
   return (
     <div className="space-y-6">
       <SummaryCard
@@ -27,6 +30,7 @@ export default async function SummaryCards({
         icon={<WalletIcon size={16} />}
         amountInCents={balance}
         size="lg"
+        userCanAddTransaction={userCanAddTransaction}
       />
 
       <div className="grid grid-cols-3 gap-6">

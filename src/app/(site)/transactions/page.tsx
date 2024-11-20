@@ -5,6 +5,7 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { canUserAddTransaction } from "@/data/can-user-add-transaction";
 
 export default async function TransactionsPage() {
   const { userId } = await auth();
@@ -15,11 +16,15 @@ export default async function TransactionsPage() {
 
   const transactions = await db.transaction.findMany({ where: { userId } });
 
+  const userCanAddTransaction = await canUserAddTransaction();
+
   return (
     <div className="flex h-full flex-col gap-6 p-6">
       <div className="flex w-full items-center justify-between">
         <h1 className="text-2xl font-bold">Transações</h1>
-        <UpsertTransactionButton />
+        <UpsertTransactionButton
+          userCanAddTransaction={userCanAddTransaction}
+        />
       </div>
 
       <ScrollArea className="h-[200px] flex-auto">

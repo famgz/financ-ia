@@ -1,6 +1,12 @@
 import AcquirePlanButton from "@/app/(site)/subscription/_components/acquire-plan-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  PREMIUM_SUBSCRIPTION_MONTHLY_PRICE_IN_CENTS,
+  REGULAR_USER_MONTHLY_MAX_TRANSACTIONS,
+} from "@/constants/subscription";
+import { getCurrentMonthTransactionsAmount } from "@/data/get-current-month-transactions";
+import { toReal } from "@/lib/utils";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -13,6 +19,8 @@ export default async function SubscriptionPage() {
   }
 
   const user = await (await clerkClient()).users.getUser(userId);
+  const currentMonthTransactionsAmount =
+    await getCurrentMonthTransactionsAmount();
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
 
   return (
@@ -34,7 +42,11 @@ export default async function SubscriptionPage() {
           <CardContent className="space-y-6 py-8">
             <div className="flex items-center gap-2">
               <CheckIcon className="text-primary" />
-              <p>Apenas 10 transações por mês (7/10)</p>
+              <p>
+                Apenas {REGULAR_USER_MONTHLY_MAX_TRANSACTIONS} transações por
+                mês ({currentMonthTransactionsAmount}/
+                {REGULAR_USER_MONTHLY_MAX_TRANSACTIONS})
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <XIcon className="text-foreground" />
@@ -56,7 +68,9 @@ export default async function SubscriptionPage() {
             </h2>
             <div className="flex-center gap-3">
               <span className="text-4xl">R$</span>
-              <span className="text-6xl font-semibold">19</span>
+              <span className="text-6xl font-semibold">
+                {toReal(PREMIUM_SUBSCRIPTION_MONTHLY_PRICE_IN_CENTS, "decimal")}
+              </span>
               <span className="text-2xl text-muted-foreground">/ mês</span>
             </div>
           </CardHeader>

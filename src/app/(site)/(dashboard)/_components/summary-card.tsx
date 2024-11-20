@@ -8,13 +8,15 @@ interface Props {
   icon: ReactNode;
   amountInCents: number;
   size?: "sm" | "lg";
+  userCanAddTransaction?: boolean;
 }
 
-export default function SummaryCard({
+export default async function SummaryCard({
   title,
   icon,
   amountInCents,
   size = "sm",
+  userCanAddTransaction = false,
 }: Props) {
   return (
     <Card className={cn(size === "sm" ? "" : "bg-muted/40")}>
@@ -35,7 +37,11 @@ export default function SummaryCard({
           {toReal(amountInCents)}
         </p>
 
-        {size === "lg" && <UpsertTransactionButton />}
+        {size === "lg" && (
+          <UpsertTransactionButton
+            userCanAddTransaction={userCanAddTransaction}
+          />
+        )}
       </CardContent>
     </Card>
   );
